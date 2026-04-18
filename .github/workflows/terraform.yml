@@ -26,7 +26,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
           role-session-name: "GitHubActions-CloudPulse"
-          aws-region: us-east-1
+          aws-region: ${{ secrets.AWS_REGION }}
 
 
       - name: Verify Bedrock Nova Lite access
@@ -34,7 +34,6 @@ jobs:
         # granted model access (a manual console step that can't be Terraformed).
         # Fails fast with a clear error instead of letting the dashboard widget
         # silently show "AI insight unavailable" after a full deploy.
-
         run: |
           if ! aws bedrock-runtime invoke-model \
             --region us-east-1 \
